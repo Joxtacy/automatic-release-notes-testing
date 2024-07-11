@@ -22,26 +22,7 @@ const Configuration: UserConfig = {
 		"scope-empty": [RuleConfigSeverity.Warning, "never"],
 		"footer-leading-blank": [RuleConfigSeverity.Error, "always"],
 		"body-leading-blank": [RuleConfigSeverity.Error, "always"],
-		"tvx-jira-rule": [RuleConfigSeverity.Warning, "always"],
 	},
-	plugins: [
-		{
-			rules: {
-				"tvx-jira-rule": (obj) => {
-					const { footer } = obj; // footer/noteKeywords are not case sensitive
-					const jiraRegex = new RegExp(`[A-Z]+-\\d+`);
-					if (!footer) {
-						return [false, "footer is missing"];
-					}
-
-					return [
-						jiraRegex.test(footer),
-						"footer should contain JIRA reference like ID-123",
-					];
-				},
-			},
-		},
-	],
 };
 
 export default Configuration;
