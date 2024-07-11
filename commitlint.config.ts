@@ -1,5 +1,9 @@
-export default {
+import type { UserConfig } from "@commitlint/types";
+import { RuleConfigSeverity } from "@commitlint/types";
+
+const Configuration: UserConfig = {
 	extends: ["@commitlint/config-conventional"],
+	formatter: "@commitlint/format",
 	parserPreset: {
 		parserOpts: {
 			noteKeywords: ["jira"],
@@ -7,7 +11,7 @@ export default {
 	},
 	rules: {
 		"scope-enum": [
-			2,
+			RuleConfigSeverity.Error,
 			"always",
 			[
 				"frontend",
@@ -15,10 +19,10 @@ export default {
 				"security",
 			],
 		],
-		"scope-empty": [1, "never"],
-		"footer-leading-blank": [2, "always"],
-		"body-leading-blank": [2, "always"],
-		"tvx-jira-rule": [1, "always"],
+		"scope-empty": [RuleConfigSeverity.Warning, "never"],
+		"footer-leading-blank": [RuleConfigSeverity.Error, "always"],
+		"body-leading-blank": [RuleConfigSeverity.Error, "always"],
+		"tvx-jira-rule": [RuleConfigSeverity.Warning, "always"],
 	},
 	plugins: [
 		{
@@ -39,3 +43,5 @@ export default {
 		},
 	],
 };
+
+export default Configuration;
